@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Ezwheels</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+</head>
+<style>
+  #sidebar-nav {
+    width: 160px;
+  }
+</style>
+
+<body>
+
+  <div class="container-fluid">
+    <div class="row flex-nowrap">
+      <div class="col-auto px-0">
+        <div id="sidebar" class="collapse collapse-horizontal show border-end">
+          <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
+            <a href="#/Dashboard" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i
+                class="bi bi-bootstrap"></i> <span>Dashboard</span> </a>
+            <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i
+                class="bi bi-film"></i> <span>Report</span></a>
+
+
+          </div>
+        </div>
+      </div>
+      <main class="col ps-md-2 pt-2">
+        <a href="#/Report" data-bs-target="#sidebar" data-bs-toggle="collapse" class="border rounded-3 p-1 text-decoration-none"><i class="bi bi-list bi-lg py-2 p-1"></i> Menu</a>
+        <button type="button" class="btn btn-danger">Content</button>
+        <app-root></app-root>
+      </main>
+    </div>
+  </div>
+
+</body>
+
+</html>
