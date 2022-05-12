@@ -1,0 +1,104 @@
+<div class="container">
+
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="span6">
+          <h5>Item Stock</h5>
+
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Car</th>
+                <th scope="col">Miles</th>
+                <th scope="col">vin</th>
+                <th scope="col">sold</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{CarModel.make}} {{CarModel.model}} {{CarModel.year}}</td>
+                <td>{{CarModel.miles}}</td>
+                <td>{{CarModel.vin}}</td>
+                <td>{{getStatus(CarModel.sold)}}</td>
+
+              </tr>
+            </tbody>
+          </table>
+          <br>
+          <h5>Services</h5>
+
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Service Type</th>
+                <th scope="col">In Date</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Description</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of Carservices">
+                <td>{{item.service.name}}</td>
+                <td>{{item.in_date | date: 'dd/MM/yyyy'}}</td>
+                <td>{{item.cost}}</td>
+                <td>{{item.description}}</td>
+
+              </tr>
+            </tbody>
+          </table>
+          <br>
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="row g-3">
+
+            <div class="col-md-3">
+              <label for="inputEmail4" class="form-label">Service to apply</label>
+              <select type="text" class="form-control"  formControlName="service">
+                <option value="" selected>Choose...</option>
+                <option *ngFor="let item of services" value="{{item.id}}">{{item.name}}</option>
+
+              </select>
+              <span class="text-danger"
+                *ngIf="(registerFormControl.service.touched || submitted) && registerFormControl.service.errors?.required">
+                (Service is required)
+              </span>
+
+            </div>
+
+            <div class="col-6">
+              <label for="inputAddress2" class="form-label">Description</label>
+              <input type="text" class="form-control" mask="A*"  placeholder="Paiting" formControlName="description">
+
+              <span class="text-danger"
+                *ngIf="(registerFormControl.description.touched || submitted) && registerFormControl.description.errors?.required">
+                (Description are required)
+              </span>
+
+            </div>
+
+            <div class="col-2">
+              <label for="inputAddress2" class="form-label">Cost</label>
+              <input type="text" class="form-control" mask="0*"  placeholder="500" formControlName="cost">
+
+              <span class="text-danger"
+                *ngIf="(registerFormControl.cost.touched || submitted) && registerFormControl.cost.errors?.required">
+                (Description are required)
+              </span>
+
+            </div>
+
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

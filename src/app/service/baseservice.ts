@@ -6,11 +6,11 @@ import { __extends } from 'tslib';
 
 export class baseservice<T>  {
   // Define API
-  public apiURL = 'http://localhost/rest-api/web/v1/';
-  public  object: T;
+  public apiURL="https://www.buylowins.com/ezwheels/rest-api/web/v1/";
+ //dev public apiURL = 'http://localhost/rest-api/web/v1/';
+  public object: T;
 
-  constructor(public http: HttpClient,controllerName:string) {
-    debugger
+  constructor(public http: HttpClient, controllerName: string) {
     this.apiURL = this.apiURL + controllerName.toString();
   }
   /*========================================
@@ -31,7 +31,7 @@ export class baseservice<T>  {
   // HttpClient API get() method => Fetch employee
   getById(id: number): Observable<object> {
     return this.http
-      .get<object>(this.apiURL + '/getbyid/' + id)
+      .get<object>(this.apiURL + '/getbyid/?id=' + id)
       .pipe(retry(1), catchError(this.handleError));
   }
   // HttpClient API post() method => Create employee
@@ -44,11 +44,22 @@ export class baseservice<T>  {
       )
       .pipe(retry(1), catchError(this.handleError));
   }
+
+    // HttpClient API post() method => Create employee
+    createmodel(employee: object): Observable<object> {
+      return this.http
+        .post<object>(
+          this.apiURL + '/createmodel',
+          JSON.stringify(employee),
+          this.httpOptions
+        )
+        .pipe(retry(1), catchError(this.handleError));
+    }
   // HttpClient API put() method => Update employee
   update(id: number, employee: object): Observable<object> {
     return this.http
       .put<any>(
-        this.apiURL + '/update/' + id,
+        this.apiURL + '/update/?id=' + id,
         JSON.stringify(employee),
         this.httpOptions
       )

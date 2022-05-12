@@ -10,7 +10,8 @@ import { __extends } from 'tslib';
 })
 export class loginservice<T>  {
   // Define API
-  public apiURL = 'http://localhost/rest-api/web/v1/';
+  //public apiURL = 'http://localhost/rest-api/web/v1/';
+  public apiURL ="https://www.buylowins.com/ezwheels/rest-api/web/v1/";
   public object: T;
   constructor(public http: HttpClient) {
     this.apiURL = this.apiURL + "login";

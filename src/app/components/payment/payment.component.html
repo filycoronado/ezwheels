@@ -1,0 +1,221 @@
+<div class="container">
+
+  <div class="card">
+    <div class="card-body">
+      <div class="row" *ngIf="flagDataSaved">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title"><strong>Order summary</strong></h3>
+            </div>
+            <div class="panel-body">
+              <div class="table-responsive">
+                <table class="table table-condensed">
+                  <thead>
+                    <tr>
+                      <td><strong>Item</strong></td>
+                      <td class="text-center"><strong>Price</strong></td>
+
+                      <td class="text-right"><strong>Totals</strong></td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                    <tr>
+                      <td>{{CarModel.make}} {{CarModel.model}} {{CarModel.year}}</td>
+                      <td class="text-center">${{CarModel.cost}}</td>
+
+                      <td class="text-right">${{CarModel.cost}}</td>
+                    </tr>
+                    <tr>
+                      <td>Services</td>
+                      <td class="text-center">${{costwithservices - CarModel.cost}}</td>
+
+                      <td class="text-right">${{costwithservices}}</td>
+                    </tr>
+                    <tr>
+                      <td>Downpayment</td>
+                      <td class="text-center">${{this.sell.downpayment}}</td>
+
+                      <td class="text-right">${{costwithservices}}</td>
+                    </tr>
+
+                    <tr>
+                      <td class="no-line"></td>
+
+                      <td class="no-line text-center"><strong>Total Transaction</strong></td>
+                      <td class="no-line text-right">${{this.sell.sell}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <button class="btn btn-default" (click)="onCancel()">Cancel</button>
+                <button class="btn btn-primary " (click)="onComplete()">Complete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="flagDataSaved==false">
+        <div class="span6">
+          <h5>Payment Form</h5>
+
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Car</th>
+                <th scope="col">Miles</th>
+                <th scope="col">vin</th>
+                <th scope="col">cost</th>
+                <th scope="col">sell</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{CarModel.make}} {{CarModel.model}} {{CarModel.year}}</td>
+                <td>{{CarModel.miles}}</td>
+                <td>{{CarModel.vin}}</td>
+                <td>{{CarModel.cost}}</td>
+                <td>{{CarModel.sell}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <br>
+          <h5>Services</h5>
+
+
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Service Type</th>
+                <th scope="col">In Date</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Description</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of Carservices">
+                <td>{{item.service.name}}</td>
+                <td>{{item.in_date | date: 'dd/MM/yyyy'}}</td>
+                <td>{{item.cost}}</td>
+                <td>{{item.description}}</td>
+
+              </tr>
+            </tbody>
+          </table>
+          <br>
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="row g-3">
+            <h5>Customer Info:</h5>
+            <div class="row">
+              <div class="col-3">
+                <label for="inputAddress2" class="form-label">Name</label>
+                <input type="text" class="form-control" mask="A*" placeholder="Jhon" formControlName="name">
+
+                <span class="text-danger"
+                  *ngIf="(registerFormControl.name.touched || submitted) && registerFormControl.name.errors?.required">
+                  (Name is required)
+                </span>
+
+              </div>
+
+              <div class="col-2">
+                <label for="inputAddress2" class="form-label">Middle Name</label>
+                <input type="text" class="form-control" mask="0*" placeholder="J." formControlName="middle_name">
+
+                <span class="text-danger"
+                  *ngIf="(registerFormControl.middle_name.touched || submitted) && registerFormControl.middle_name.errors?.required">
+                  (Middle name is required)
+                </span>
+
+              </div>
+
+              <div class="col-3 ">
+                <label for="inputAddress2" class="form-label">Last Name</label>
+                <input type="text" class="form-control" mask="A*" placeholder="Smith" formControlName="last_name">
+
+                <span class="text-danger"
+                  *ngIf="(registerFormControl.last_name.touched || submitted) && registerFormControl.last_name.errors?.required">
+                  (Last Name is required)
+                </span>
+
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-3 ">
+                <label for="inputAddress2" class="form-label">Phone</label>
+                <input type="text" class="form-control" mask="(000)000-0000" placeholder="(520)445-3322"
+                  formControlName="phone">
+
+                <span class="text-danger"
+                  *ngIf="(registerFormControl.phone.touched || submitted) && registerFormControl.phone.errors?.required">
+                  (Phone required)
+                </span>
+
+              </div>
+              <div class="col-4">
+                <label for="inputAddress2" class="form-label">Address</label>
+                <input type="text" class="form-control" mask="A*" placeholder="Ajo way st 304"
+                  formControlName="address">
+
+                <span class="text-danger"
+                  *ngIf="(registerFormControl.address.touched || submitted) && registerFormControl.address.errors?.required">
+                  (Address isrequired)
+                </span>
+
+              </div>
+            </div>
+
+            <h5>Payment Info:</h5>
+
+            <div class="row">
+
+              <div class="col-3 ">
+                <label for="inputAddress2" class="form-label">Cost + Services</label>
+                <input type="text" class="form-control" mask="0*" placeholder="3500" formControlName="cost">
+
+                <span class="text-danger"
+                  *ngIf="(registerFormControl.cost.touched || submitted) && registerFormControl.cost.errors?.required">
+                  (Cost required)
+                </span>
+
+              </div>
+              <div class="col-3">
+                <label for="inputAddress2" class="form-label">Downpayment</label>
+                <input type="text" class="form-control" mask="0*" placeholder="1500" formControlName="downpayment">
+
+                <span class="text-danger"
+                  *ngIf="(registerFormControl.downpayment.touched || submitted) && registerFormControl.downpayment.errors?.required">
+                  (Downpayment isrequired)
+                </span>
+
+              </div>
+
+              <div class="col-3">
+                <label for="inputAddress2" class="form-label">Total</label>
+                <input type="text" class="form-control" mask="0*" placeholder="4500" formControlName="sell">
+
+                <span class="text-danger"
+                  *ngIf="(registerFormControl.sell.touched || submitted) && registerFormControl.sell.errors?.required">
+                  (Total isrequired)
+                </span>
+
+              </div>
+            </div>
+
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+<div class="container">
+
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="span6">
+          <h5>Item Stock</h5>
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="row g-3">
+            <div class="col-md-3">
+              <label for="inputEmail4" class="form-label">Make</label>
+              <input type="text" class="form-control" mask="S*" placeholder="Toyota" formControlName="make">
+
+              <span class="text-danger"
+                *ngIf="(registerFormControl.make.touched || submitted) && registerFormControl.make.errors?.required">
+                (Make is required)
+              </span>
+
+            </div>
+
+            <div class="col-md-3">
+              <label for="inputEmail4" class="form-label">Model</label>
+              <input type="text" class="form-control" mask="A*"  placeholder="Collora" formControlName="model">
+
+              <span class="text-danger"
+                *ngIf="(registerFormControl.model.touched || submitted) && registerFormControl.model.errors?.required">
+                (Model is required)
+              </span>
+
+            </div>
+
+            <div class="col-md-3">
+              <label for="inputEmail4" class="form-label">Year</label>
+              <input type="text" class="form-control" mask="0*" placeholder="2015" formControlName="year">
+
+              <span class="text-danger"
+                *ngIf="(registerFormControl.year.touched || submitted) && registerFormControl.year.errors?.required">
+                (Year is required)
+              </span>
+
+            </div>
+
+            <div class="col-md-3">
+              <label for="inputPassword4" class="form-label">Vin</label>
+              <input type="text" class="form-control" mask="A*" placeholder="4Y1SL65848Z411439" formControlName="vin">
+
+              <span class="text-danger"
+                *ngIf="(registerFormControl.vin.touched || submitted) && registerFormControl.vin.errors?.required">
+                (Vin is required)
+              </span>
+
+            </div>
+            <div class="col-3">
+              <label for="inputAddress" class="form-label">Type</label>
+              <select id="inputState" class="form-select" formControlName="type">
+                <option value="" selected>Choose...</option>
+                <option value="1">SUV</option>
+                <option value="2">SEDAN</option>
+                <option value="3">TRUCK</option>
+              </select>
+
+              <span class="text-danger"
+                *ngIf="(registerFormControl.type.touched || submitted) && registerFormControl.type.errors?.required">
+                (Type is required)
+              </span>
+
+            </div>
+            <div class="col-3">
+              <label for="inputAddress2" class="form-label">Miles</label>
+              <input type="text" class="form-control" mask="0*" placeholder="150000" formControlName="miles">
+
+              <span class="text-danger"
+                *ngIf="(registerFormControl.miles.touched || submitted) && registerFormControl.miles.errors?.required">
+                (Miles are required)
+              </span>
+
+            </div>
+            <div class="col-md-3">
+              <label  class="form-label">Cost Value</label>
+              <input type="text" class="form-control" mask="0*" placeholder="150000" formControlName="cost_value">
+
+              <span class="text-danger"
+                *ngIf="(registerFormControl.cost_value.touched || submitted) && registerFormControl.cost_value.errors?.required">
+                (Cost is required)
+              </span>
+
+            </div>
+
+            <div class="col-md-3">
+              <label class="form-label">Sell Value</label>
+              <input type="text" class="form-control" mask="0*" placeholder="150000" formControlName="sell_value">
+
+              <span class="text-danger"
+                *ngIf="(registerFormControl.sell_value.touched || submitted) && registerFormControl.sell_value.errors?.required">
+                (Sell is required)
+              </span>
+
+            </div>
+
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

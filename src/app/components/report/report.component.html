@@ -1,0 +1,75 @@
+<div class="container">
+
+  <div class="card">
+    <div class="card-body">
+      <div class="row" id="Filters">
+        <div class="span6">
+          <h5>Sales Report</h5>
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="row g-3">
+            <div class="col-md-3">
+              <label for="inputEmail4" class="form-label">Start Date</label>
+              <input type="text" class="form-control" [dropSpecialCharacters]="false" mask="00/00/0000"
+                placeholder="mm/dd/yyyy" formControlName="start_date">
+
+              <span class="text-danger"
+                *ngIf="(registerFormControl.start_date.touched || submitted) && registerFormControl.start_date.errors?.required">
+                (Start Date is required)
+              </span>
+
+            </div>
+
+            <div class="col-md-3">
+              <label for="inputEmail4" class="form-label">End Date</label>
+              <input type="text" class="form-control" [dropSpecialCharacters]="false" mask="00/00/0000"
+                placeholder="mm/dd/yyyy" formControlName="end_date">
+
+              <span class="text-danger"
+                *ngIf="(registerFormControl.end_date.touched || submitted) && registerFormControl.end_date.errors?.required">
+                (End Date is required)
+              </span>
+
+            </div>
+
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="button" class="btn btn-secondary" (click)="onPrint()">Print</button>
+
+            </div>
+          </form>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Car</th>
+                <th scope="col">cost</th>
+                <th scope="col">downpayment</th>
+                <th scope="col">total</th>
+                <th scope="col">profit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of list">
+                <td>{{item.car.make}} {{item.car.model}} {{item.car.year}}  (Vin:{{item.car.vin}})</td>
+                <td>${{item.cost}}</td>
+                <td>${{item.downpayment}}</td>
+                <td>${{item.sell}}</td>
+                <td>${{item.profit}}</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>${{profit}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
